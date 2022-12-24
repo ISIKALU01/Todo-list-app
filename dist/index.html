@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DOCKET</title>
+    <link rel="stylesheet" href="style.css" />
+    <script
+      src="https://kit.fontawesome.com/4c536a6bd5.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body>
+    <header class="header">
+      <div class="applogo">
+        <i class="fa fa-tasks" aria-hidden="true"></i>
+        <h1 class="app-name">Docket</h1>
+      </div>
+      <button class="open-nav-button" id="open-nav-button">
+        <i class="fas fa-bars"></i>
+      </button>
+    </header>
+
+    
+    <main class="main">
+      <nav class="nav" id="nav">
+        
+        <!-- Default projects -->
+        <div class="default-projects">
+          <button class="default-project-button" id="inbox-button">
+            <i class="fas fa-inbox"></i>
+            Inbox
+          </button>
+          <button class="default-project-button" id="today-button">
+            <i class="fas fa-calendar-day"></i>
+            Today
+          </button>
+          <button class="default-project-button" id="week-button">
+            <i class="fas fa-calendar-week"></i>
+            This week
+          </button>
+        </div>
+
+
+        <!-- User projects -->
+        <h1 class="projects-title">Projects</h1>
+        <div class="projects-list" id="projects-list"></div>
+        <button class="add-project-button" id="add-project-button">
+          <i class="fas fa-plus"></i>
+          Add Project
+        </button>
+
+        <div class="add-project-bar" id="add-project-bar">
+          <input class="input-add-project-bar" id="input-add-project-bar" type="text"/>
+          <div class="add-project-bar-buttons">
+            <button class="button-add-project-bar" id="button-add-project-bar">Add</button>
+            <button class="button-cancel-project-bar" id="button-cancel-project-bar">Cancel</button>
+          </div>
+        </div>
+      </nav>
+
+      <!-- Tasks -->
+      <div class="project-board" id="project-board"></div>
+    </main>
+
+    <script src="main.js"></script>
+
+  </body>
+</html>

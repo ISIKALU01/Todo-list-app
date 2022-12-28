@@ -1,0 +1,183 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background-color: antiquewhite;
+  color: rgb(37, 34, 34);
+  font-family: 'Roboto', sans-serif;
+  line-height: 1.6;
+}
+
+button,
+input {
+  border: none;
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  outline: none;
+}
+
+button {
+  width: 100%;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+i {
+  margin-right: 10px;
+}
+
+/* Header */
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  background-color: rgb(14, 14, 83);
+  color: antiquewhite;
+}
+
+.applogo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.open-nav-button {
+  display: none;
+  width: 40px;
+  padding: 0;
+  background-color: darkgray;
+  font-size: 40px;
+}
+
+.button-open-nav i {
+  margin-right: 0;
+}
+
+.applogo img{
+  padding: 10px;
+}
+
+.applogo h1{
+  color: antiquewhite;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 30px;
+}
+
+
+
+/* main */
+
+.main {
+  display: flex;
+  min-height: calc(100vh - 104px - 48px);
+}
+
+
+.nav {
+  width: 300px;
+  min-width: 250px;
+  padding: 20px;
+  background-color: white;
+}
+
+.nav.active {
+  display: block;
+}
+
+
+.default-project-button {
+  background-color:white;
+  text-align: left;
+}
+
+.projects-title{
+  padding: 10px;
+  margin-top: 30px;
+}
+
+.add-project-button{
+  margin-top: 10px;
+  margin-left: 2px;
+  background-color: white;
+  text-align: left;
+}
+
+.default-project-button.active {
+  background-color:rgb(14, 14, 83);
+  font-weight: bold;
+}
+
+.default-project-button:hover {
+  background-color:rgb(14, 14, 83);
+  color: antiquewhite;
+}
+
+.add-project-bar {
+  display: none;
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+}
+
+.add-project-bar.active {
+  display: block;
+}
+
+.input-add-project-bar {
+  border: 1px solid #aaa;
+  margin-bottom: 10px;
+}
+
+.add-project-bar-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.button-add-project-bar {
+  border: 1px solid #99dd99;
+  background-color: #aaffaa;
+  font-weight: bold;
+}
+
+.button-cancel-project-bar {
+  border: 1px solid #eeadad;
+  background-color: #ffbebe;
+  font-weight: bold;
+}
+
+
+.button-add-project-bar:hover {
+  background-color: #a6f0a6;
+}
+
+.button-cancel-project-bar:hover {
+  background-color: #f5b2b2;
+}
+
+.project-board {
+  width: 900px;
+  padding: 20px;
+  margin: 0 auto;
+}
+
+.project-board h1 {
+  padding: 0 10px;
+  margin-bottom: 10px;
+}

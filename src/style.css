@@ -105,26 +105,56 @@ i {
   text-align: left;
 }
 
-.projects-title{
+.projects-title {
   padding: 10px;
   margin-top: 30px;
 }
 
-.add-project-button{
+.button-project {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: antiquewhite;
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+
+.add-project-button {
   margin-top: 10px;
   margin-left: 2px;
   background-color: white;
   text-align: left;
 }
 
+.add-project-button.active{
+  display: none;
+}
+
+
+.button-project.active,
 .default-project-button.active {
   background-color:rgb(14, 14, 83);
   font-weight: bold;
+  color: whitesmoke;
 }
 
-.default-project-button:hover {
-  background-color:rgb(14, 14, 83);
-  color: antiquewhite;
+.button-project:hover,
+.default-project-button:hover,
+.add-project-button:hover {
+  background-color: #ccc;
+}
+
+.right-project-panel {
+  visibility: hidden;
+}
+
+.button-project:hover .right-project-panel {
+  visibility: visible;
+}
+
+.fa-times {
+  margin-right: 0;
 }
 
 .add-project-bar {

@@ -7,17 +7,14 @@ export default class UI {
 
   static loadHomepage() {
     UI.loadProjects()
+    UI.initProjectButtons()
   }
 
   static loadProjects() {
     Storage.getTodoList()
       .getProjects()
       .forEach((project) => {
-        if (
-          project.name !== 'Inbox' &&
-          project.name !== 'Today' &&
-          project.name !== 'This week'
-        ) {
+        if (project.name !== 'Inbox' && project.name !== 'Today' && project.name !== 'This week') {
           UI.createProject(project.name)
         }
       })
@@ -39,9 +36,14 @@ export default class UI {
           <i class="fas fa-times"></i>
         </div>
       </button>`
+
+      UI.initProjectButtons()
   }
 
-  
+  static clearProjects() {
+    const projectsList = document.getElementById('projects-list')
+    projectsList.textContent = ''
+  }
 
   
 
@@ -116,4 +118,44 @@ export default class UI {
     if (e.key === 'Enter') UI.addProject()
   }
 
+
+
+  //PROJECT EVENT LISTENERS
+  static initProjectButtons(){
+    const projectButtons = document.querySelectorAll(".button-project")
+    const convertButtons = Array.from(projectButtons)
+    console.log(convertButtons)
+    console.log(projectButtons)
+
+    projectButtons.forEach((projectButton) =>
+    projectButton.addEventListener('click', UI.handleProjectButton)
+
+    )
+  }
+
+
+  static deleteProject(projectName){
+    Storage.deleteProject(projectName)
+    UI.clearProjects()
+    UI.loadProjects()
+  }
+
+  static handleProjectButton(e) {
+    const projectName = this.children[0].children[1].textContent
+    console.log(projectName)
+    console.log(e.target)
+
+    if (e.target.classList.contains('fa-times')) {
+      UI.deleteProject(projectName)
+    }
+
+  }
+
 }
+
+
+
+
+
+
+

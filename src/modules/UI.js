@@ -127,9 +127,6 @@ export default class UI {
   //PROJECT EVENT LISTENERS
   static initProjectButtons(){
     const projectButtons = document.querySelectorAll(".button-project")
-    const convertButtons = Array.from(projectButtons)
-    console.log(convertButtons)
-    console.log(projectButtons)
 
     projectButtons.forEach((projectButton) =>
     projectButton.addEventListener('click', UI.handleProjectButton)
@@ -146,8 +143,6 @@ export default class UI {
 
   static handleProjectButton(e) {
     const projectName = this.children[0].children[1].textContent
-    console.log(projectName)
-    console.log(e.target)
 
     if (e.target.classList.contains('fa-times')) {
       UI.deleteProject(projectName)

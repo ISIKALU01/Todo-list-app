@@ -22,6 +22,7 @@ export default class UI {
     UI.initAddProjectButtons()
   }
 
+
   // CREATING CONTENT
 
   static createProject(name) {
@@ -120,6 +121,9 @@ export default class UI {
 
 
 
+
+
+  
   //PROJECT EVENT LISTENERS
   static initProjectButtons(){
     const projectButtons = document.querySelectorAll(".button-project")

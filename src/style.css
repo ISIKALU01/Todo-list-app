@@ -9,7 +9,7 @@
 body {
   background-color: rgb(206, 195, 180); 
   color: rgb(37, 34, 34);
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   line-height: 1.6;
 }
 
@@ -74,7 +74,6 @@ i {
 
 .applogo h1{
   color: antiquewhite;
-  font-family: 'Courier New', Courier, monospace;
   font-size: 30px;
 }
 
@@ -117,7 +116,6 @@ i {
   background-color: white;
   text-align: left;
   margin-bottom: 10px;
-  font-style: italic;
 }
 
 

@@ -215,3 +215,42 @@ i {
   font-size: 30px;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
+
+.add-task-popup {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+label{
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+.button-add-task {
+  width: 50%;
+  background-color: inherit;
+  text-align: left;
+}
+
+.priority{
+  width: 100%;
+  height: auto;
+  font-size: 20px;
+  padding: 10px;
+}
+
+textarea {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.add-task-popup-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 20px;
+}
+
+

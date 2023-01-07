@@ -44,19 +44,21 @@ export default class UI {
           <input type= "date" id= "due-date" name= "due-date"/>
 
           <label for= "priority">Priority:</label>
-          <br>
-          <select name="priority id= "priority">
+          
+          <select class="priority" name="priority id= "priority" >
             <option class= "low" value="low">Low</option>
             <option class= "medium" value="medium">Medium</option>
             <option class= "high" value="high">High</option>
           </select>
-          <br>
+          
 
+          <label for= "description">Description:</label>
+        
           <textarea name="description" id="description" cols="30" rows="6"></textarea>
         
           <div class="add-task-popup-buttons">
             <button class="button-add-task-popup" id="button-add-task-popup">Add</button>
-            <buttonclass="button-cancel-task-popup"id="button-cancel-task-popup">Cancel</button>
+            <button class="button-cancel-task-popup" id="button-cancel-task-popup">Cancel</button>
           </div>
         </div>`
     }

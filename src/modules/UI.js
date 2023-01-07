@@ -23,6 +23,46 @@ export default class UI {
   }
 
 
+  static loadProjectContent(projectName) {
+    const projectPreview = document.getElementById('project-board')
+    projectPreview.innerHTML = `
+        <h1 id="project-name">${projectName}</h1>
+        <div class="tasks-list" id="tasks-list"></div>`
+
+    if (projectName !== 'Today' && projectName !== 'This week') {
+      projectPreview.innerHTML += `
+        <button class="button-add-task" id="button-add-task">
+          <i class="fas fa-plus"></i>
+          Add Task
+        </button>
+
+        <div class="add-task-popup" id="add-task-popup">
+          <label for= "task-name">Task Name:</label>
+          <input class="input-add-task-popup" id="input-add-task-popup" type="text" placeholder= "Task Name"/>
+
+          <label for="date">Due date:</label>
+          <input type= "date" id= "due-date" name= "due-date"/>
+
+          <label for= "priority">Priority:</label>
+          <br>
+          <select name="priority id= "priority">
+            <option class= "low" value="low">Low</option>
+            <option class= "medium" value="medium">Medium</option>
+            <option class= "high" value="high">High</option>
+          </select>
+          <br>
+
+          <textarea name="description" id="description" cols="30" rows="6"></textarea>
+        
+          <div class="add-task-popup-buttons">
+            <button class="button-add-task-popup" id="button-add-task-popup">Add</button>
+            <buttonclass="button-cancel-task-popup"id="button-cancel-task-popup">Cancel</button>
+          </div>
+        </div>`
+    }
+  }
+
+
   // CREATING CONTENT
 
   static createProject(name) {
@@ -148,7 +188,21 @@ export default class UI {
       UI.deleteProject(projectName)
     }
 
+    UI.openProject(projectName, this)
+
   }
+
+  static openProject(projectName, projectButton) {
+    const defaultProjectButtons = document.querySelectorAll('.default-project-button')
+    const projectButtons = document.querySelectorAll('.button-project')
+    const buttons = [...defaultProjectButtons, ...projectButtons]
+
+    buttons.forEach((button) => button.classList.remove('active'))
+    projectButton.classList.add('active')
+    UI.closeAddProjectPopup()
+    UI.loadProjectContent(projectName)
+  }
+
 
 }
 

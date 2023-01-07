@@ -7,7 +7,7 @@
 }
 
 body {
-  background-color: antiquewhite;
+  background-color: rgb(206, 195, 180); 
   color: rgb(37, 34, 34);
   font-family: 'Roboto', sans-serif;
   line-height: 1.6;
@@ -46,7 +46,7 @@ i {
   align-items: center;
   justify-content: space-between;
   padding: 20px;
-  background-color: rgb(14, 14, 83);
+  background-color: rgba(0, 0, 0, 0.781);
   color: antiquewhite;
 }
 
@@ -114,9 +114,10 @@ i {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: antiquewhite;
+  background-color: white;
   text-align: left;
   margin-bottom: 10px;
+  font-style: italic;
 }
 
 
@@ -134,7 +135,7 @@ i {
 
 .button-project.active,
 .default-project-button.active {
-  background-color:rgb(14, 14, 83);
+  background-color:gray;
   font-weight: bold;
   color: whitesmoke;
 }
@@ -142,7 +143,8 @@ i {
 .button-project:hover,
 .default-project-button:hover,
 .add-project-button:hover {
-  background-color: #ccc;
+  background-color: rgba(0, 0, 0, 0.795);
+  color: whitesmoke;
 }
 
 .right-project-panel {
@@ -210,4 +212,6 @@ i {
 .project-board h1 {
   padding: 0 10px;
   margin-bottom: 10px;
+  font-size: 30px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }

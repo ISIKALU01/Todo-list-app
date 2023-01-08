@@ -254,7 +254,7 @@ textarea {
 
 
 
-.add-task-popup-buttons.active {
+.add-task-popup-buttons {
   display: flex;
   align-items: center;
   justify-content: space-around;

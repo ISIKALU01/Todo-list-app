@@ -62,7 +62,10 @@ export default class UI {
           </div>
         </div>`
     }
+    UI.initAddTaskButtons()
   }
+
+
 
 
   // CREATING CONTENT
@@ -204,6 +207,30 @@ export default class UI {
     UI.closeAddProjectPopup()
     UI.loadProjectContent(projectName)
   }
+
+
+
+
+
+
+
+
+
+
+ //ADD TASK EVENT LISTENERS
+
+ static initAddTaskButtons(){
+  const addTaskButton = document.querySelector(".button-add-task")
+
+  addTaskButton.addEventListener("click", UI.openAddTaskPopup )
+ }
+
+ static openAddTaskPopup(){
+  const addTaskPopup = document.querySelector(".add-task-popup")
+
+  addTaskPopup.classList.add('active')
+
+ }
 
 
 }

@@ -259,3 +259,12 @@ textarea {
 }
 
 
+.button-add-task-popup {
+  background-color: #66e766;
+  font-weight: bold;
+}
+
+.button-cancel-task-popup {
+  background-color: #e45050;
+  font-weight: bold;
+}

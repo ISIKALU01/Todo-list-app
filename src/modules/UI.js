@@ -219,17 +219,31 @@ export default class UI {
 
  //ADD TASK EVENT LISTENERS
 
- static initAddTaskButtons(){
-  const addTaskButton = document.querySelector(".button-add-task")
+  static initAddTaskButtons(){
+   const addTaskButton = document.getElementById('button-add-task')
+   const addTaskPopupButton = document.getElementById('button-add-task-popup')
+   const cancelTaskPopupButton = document.getElementById('button-cancel-task-popup')
 
-  addTaskButton.addEventListener("click", UI.openAddTaskPopup )
- }
+   addTaskButton.addEventListener("click", UI.openAddTaskPopup )
+   cancelTaskPopupButton.addEventListener("click", UI.closeAddTaskPopup )
+  }
 
- static openAddTaskPopup(){
-  const addTaskPopup = document.querySelector(".add-task-popup")
 
-  addTaskPopup.classList.add('active')
+  static openAddTaskPopup(){
+   const addTaskPopup = document.querySelector(".add-task-popup")
+   const addTaskButton = document.querySelector(".button-add-task")
+  
+   addTaskPopup.classList.add('active')
 
+  }
+
+
+  static closeAddTaskPopup() {
+   const addTaskPopup = document.getElementById('add-task-popup')
+   const addTaskButton = document.getElementById('button-add-task')
+   const addTaskInput = document.getElementById('input-add-task-popup')
+
+   addTaskPopup.classList.remove('active')
  }
 
 

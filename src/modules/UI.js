@@ -166,7 +166,7 @@ export default class UI {
     addProjectPopupInput.value = ''
   }
 
-  
+
   static addProject() {
     const addProjectPopupInput = document.getElementById('input-add-project-bar')
     const projectName = addProjectPopupInput.value
@@ -217,7 +217,7 @@ export default class UI {
     const projectName = this.children[0].children[1].textContent
     console.log(this)
     if(this.classList.contains('active')){
-      UI.closeAddTaskPopup()
+      //UI.closeAddTaskPopup()
       UI.clearProjectBoard()
     }
 

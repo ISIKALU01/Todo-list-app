@@ -22,6 +22,23 @@ export default class UI {
     UI.initAddProjectButtons()
   }
 
+/*
+  static makeProjectActive(project) {
+    const projectList = document.querySelector('.projects-list')
+    const projectName = document.querySelector('.button-project')
+    console.log(projectList.children)
+    //console.log(projectList.children.length === 1)
+    console.log(project == projectList.children[0].textContent)
+    console.log(project)
+    console.log(projectList.children[0].textContent)
+
+    if(projectList.children.length === 1){
+        projectList.children[0].classList.add('active')
+      
+    }
+  }
+*/
+
 
   static loadProjectContent(projectName) {
     const projectPreview = document.getElementById('project-board')
@@ -91,11 +108,17 @@ export default class UI {
     projectsList.textContent = ''
   }
 
-  
+  static clearProjectBoard() {
+    const projectPreview = document.querySelector('.project-board')
+    //const projectList = document.querySelector('.projects-list')
+    projectPreview.innerHTML = ""
+  }
+
+
 
   
 
-
+ 
 
 
 
@@ -122,12 +145,15 @@ export default class UI {
     addProjectPopupInput.addEventListener('keypress', UI.handleAddProjectPopupInput)
   }
 
+
+
   static openAddProjectPopup() {
     const addProjectPopup = document.getElementById('add-project-bar')
     const addProjectButton = document.getElementById('add-project-button')
 
     addProjectPopup.classList.add('active')
     addProjectButton.classList.add('active')
+    UI.clearProjectBoard()
   }
 
   static closeAddProjectPopup() {
@@ -140,6 +166,7 @@ export default class UI {
     addProjectPopupInput.value = ''
   }
 
+  
   static addProject() {
     const addProjectPopupInput = document.getElementById('input-add-project-bar')
     const projectName = addProjectPopupInput.value
@@ -188,9 +215,16 @@ export default class UI {
 
   static handleProjectButton(e) {
     const projectName = this.children[0].children[1].textContent
+    console.log(this)
+    if(this.classList.contains('active')){
+      UI.closeAddTaskPopup()
+      UI.clearProjectBoard()
+    }
 
     if (e.target.classList.contains('fa-times')) {
       UI.deleteProject(projectName)
+      UI.clearProjectBoard()
+      return 
     }
 
     UI.openProject(projectName, this)
@@ -244,6 +278,14 @@ export default class UI {
    const addTaskInput = document.getElementById('input-add-task-popup')
 
    addTaskPopup.classList.remove('active')
+ }
+
+  static addTask(){
+   const projectName = document.getElementById('project-name').textContent
+   const addTaskPopupInput = document.getElementById('input-add-task-popup')
+   //const addTaskDescription = document.
+   const taskName = addTaskPopupInput.value
+
  }
 
 

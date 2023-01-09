@@ -133,7 +133,7 @@ i {
 
 .button-project.active,
 .default-project-button.active {
-  background-color:gray;
+  background-color:rgba(0, 0, 0, 0.795);
   font-weight: bold;
   color: whitesmoke;
 }
@@ -241,13 +241,13 @@ label{
 .priority{
   width: 100%;
   height: auto;
-  font-size: 20px;
-  padding: 10px;
+  font-size: 15px;
 }
 
 textarea {
   width: 100%;
   margin-bottom: 10px;
+  font-family: 'Courier New', Courier, monospace;
 }
 
 

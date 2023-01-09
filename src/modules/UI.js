@@ -22,22 +22,7 @@ export default class UI {
     UI.initAddProjectButtons()
   }
 
-/*
-  static makeProjectActive(project) {
-    const projectList = document.querySelector('.projects-list')
-    const projectName = document.querySelector('.button-project')
-    console.log(projectList.children)
-    //console.log(projectList.children.length === 1)
-    console.log(project == projectList.children[0].textContent)
-    console.log(project)
-    console.log(projectList.children[0].textContent)
 
-    if(projectList.children.length === 1){
-        projectList.children[0].classList.add('active')
-      
-    }
-  }
-*/
 
 
   static loadProjectContent(projectName) {
@@ -110,7 +95,6 @@ export default class UI {
 
   static clearProjectBoard() {
     const projectPreview = document.querySelector('.project-board')
-    //const projectList = document.querySelector('.projects-list')
     projectPreview.innerHTML = ""
   }
 
@@ -215,9 +199,7 @@ export default class UI {
 
   static handleProjectButton(e) {
     const projectName = this.children[0].children[1].textContent
-    console.log(this)
     if(this.classList.contains('active')){
-      //UI.closeAddTaskPopup()
       UI.clearProjectBoard()
     }
 
@@ -283,7 +265,6 @@ export default class UI {
   static addTask(){
    const projectName = document.getElementById('project-name').textContent
    const addTaskPopupInput = document.getElementById('input-add-task-popup')
-   //const addTaskDescription = document.
    const taskName = addTaskPopupInput.value
 
  }

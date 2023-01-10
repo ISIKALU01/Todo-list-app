@@ -1,5 +1,6 @@
 import { format } from 'date-fns'
 import Storage from './Storage'
+import Task from './Task'
 import Project from './Project'
 
 export default class UI {
@@ -47,7 +48,7 @@ export default class UI {
 
           <label for= "priority">Priority:</label>
           
-          <select class="priority" name="priority id= "priority" >
+          <select class="priority" name="priority" id= "priority" >
             <option class= "low" value="low">Low</option>
             <option class= "medium" value="medium">Medium</option>
             <option class= "high" value="high">High</option>
@@ -86,6 +87,25 @@ export default class UI {
       </button>`
 
       UI.initProjectButtons()
+  }
+
+  static createTask(name, dueDate, priority, description) {
+    const tasksList = document.getElementById('tasks-list')
+    tasksList.innerHTML += `
+      <button class="button-task" data-task-button>
+        <div class="left-task-panel">
+          <i class="far fa-circle"></i>
+          <p class="task-content">${name}</p>
+          <p class="task-level">${priority}</p>
+          <input type="text" class="input-task-name" data-input-task-name>
+        </div>
+        <div class="right-task-panel">
+          <p class="due-date" id="due-date">${dueDate}</p>
+          <input type="date" class="input-due-date" data-input-due-date>
+          <i class="fas fa-times"></i>
+        </div>
+      </button>
+      <div class="description">${description}</div>`
   }
 
   static clearProjects() {
@@ -241,6 +261,7 @@ export default class UI {
    const cancelTaskPopupButton = document.getElementById('button-cancel-task-popup')
 
    addTaskButton.addEventListener("click", UI.openAddTaskPopup )
+   addTaskPopupButton.addEventListener("click", UI.addTask)
    cancelTaskPopupButton.addEventListener("click", UI.closeAddTaskPopup )
   }
 
@@ -257,16 +278,39 @@ export default class UI {
   static closeAddTaskPopup() {
    const addTaskPopup = document.getElementById('add-task-popup')
    const addTaskButton = document.getElementById('button-add-task')
-   const addTaskInput = document.getElementById('input-add-task-popup')
 
    addTaskPopup.classList.remove('active')
+   
  }
 
   static addTask(){
    const projectName = document.getElementById('project-name').textContent
-   const addTaskPopupInput = document.getElementById('input-add-task-popup')
-   const taskName = addTaskPopupInput.value
+   const addTaskPopupInput = document.getElementById('input-add-task-popup').value
+   const addTaskDate = document.getElementById('due-date').value
+   const addTaskPriority = document.getElementById('priority').value
+   const addTaskDescription = document.getElementById('description').value
 
+ 
+   
+   console.log(addTaskPopupInput)
+   console.log(addTaskDate)
+   console.log(addTaskPriority)
+   console.log(addTaskDescription)
+
+   if (addTaskPopupInput === '') {
+    alert("Task name can't be empty")
+    return
+  }
+
+  if (Storage.getTodoList().getProject(projectName).contains(addTaskPopupInput)) {
+    alert('Task names must be different')
+    addTaskPopupInput.value = ''
+    return
+  }
+
+  Storage.addTask(projectName, new Task(addTaskPopupInput, addTaskDate, addTaskPriority, addTaskDescription))
+  UI.createTask(addTaskPopupInput, addTaskDate, addTaskPriority, addTaskDescription)
+  UI.closeAddTaskPopup()
  }
 
 }

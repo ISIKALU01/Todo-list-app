@@ -268,3 +268,91 @@ textarea {
   background-color: #e45050;
   font-weight: bold;
 }
+
+
+.button-task {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  cursor: default;
+  background-color: whitesmoke;
+  margin-bottom: 10px;
+  font-size: 16px;
+  font-style: italic;
+}
+
+.button-task:hover {
+  background-color: rgb(211, 211, 211);
+}
+
+.left-task-panel {
+  display: flex;
+  align-items: center;
+}
+
+.fa-circle {
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.task-content {
+  cursor: pointer;
+}
+
+.task-content.active {
+  display: none;
+}
+
+.input-task-name {
+  display: none;
+  height: 24px;
+  padding: 5px;
+  border: 1px solid #555;
+  background-color: white;
+  color: inherit;
+  font-family: inherit;
+}
+
+.input-task-name.active {
+  display: block;
+}
+
+.right-task-panel {
+  display: flex;
+  align-items: center;
+}
+
+.due-date {
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.due-date.active {
+  display: none;
+}
+
+.input-due-date {
+  display: none;
+  height: 24px;
+  padding: 5px;
+  border: 1px solid #555;
+  margin: 0 10px;
+  background-color: var(--primary-light);
+  color: inherit;
+  font-family: inherit;
+}
+
+.input-due-date.active {
+  display: block;
+}
+
+.button-task .right-task-panel i {
+  visibility: hidden;
+  cursor: pointer;
+}
+
+.button-task:hover .right-task-panel i {
+  visibility: visible;
+}
+

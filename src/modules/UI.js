@@ -24,7 +24,16 @@ export default class UI {
   }
 
 
+  static loadTasks(projectName) {
+    Storage.getTodoList()
+      .getProject(projectName)
+      .getTasks()
+      .forEach((task) => UI.createTask(task.name, task.dueDate))
 
+    if (projectName !== 'Today' && projectName !== 'This week') {
+      UI.initAddTaskButtons()
+    }
+  }
 
   static loadProjectContent(projectName) {
     const projectPreview = document.getElementById('project-board')
@@ -65,6 +74,7 @@ export default class UI {
           </div>
         </div>`
     }
+    UI.loadTasks(projectName)
     UI.initAddTaskButtons()
   }
 
@@ -95,9 +105,11 @@ export default class UI {
       <button class="button-task" data-task-button>
         <div class="left-task-panel">
           <i class="far fa-circle"></i>
-          <p class="task-content">${name}</p>
-          <p class="task-level">${priority}</p>
+          <p class="task-content">${name}</p> 
           <input type="text" class="input-task-name" data-input-task-name>
+        </div>
+        <div class="middle-task-panel">
+          <p class="task-level">Priority:${priority}</p>
         </div>
         <div class="right-task-panel">
           <p class="due-date" id="due-date">${dueDate}</p>
@@ -277,9 +289,11 @@ export default class UI {
 
   static closeAddTaskPopup() {
    const addTaskPopup = document.getElementById('add-task-popup')
+   const addTaskInput = document.getElementById('input-add-task-popup')
    const addTaskButton = document.getElementById('button-add-task')
 
    addTaskPopup.classList.remove('active')
+   addTaskInput.value = ''
    
  }
 
@@ -311,6 +325,10 @@ export default class UI {
   Storage.addTask(projectName, new Task(addTaskPopupInput, addTaskDate, addTaskPriority, addTaskDescription))
   UI.createTask(addTaskPopupInput, addTaskDate, addTaskPriority, addTaskDescription)
   UI.closeAddTaskPopup()
+ }
+
+ static handleAddTaskPopupInput(e) {
+  if (e.key === 'Enter') UI.addTask()
  }
 
 }

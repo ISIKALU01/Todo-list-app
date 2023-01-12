@@ -118,6 +118,8 @@ export default class UI {
         </div>
       </button>
       <div class="description">${description}</div>`
+
+      UI.initTaskButtons()
   }
 
   static clearProjects() {
@@ -128,6 +130,11 @@ export default class UI {
   static clearProjectBoard() {
     const projectPreview = document.querySelector('.project-board')
     projectPreview.innerHTML = ""
+  }
+
+  static clearTasks() {
+    const tasksList = document.getElementById('tasks-list')
+    tasksList.textContent = ''
   }
 
 
@@ -331,7 +338,45 @@ export default class UI {
   if (e.key === 'Enter') UI.addTask()
  }
 
+
+ //TASK EVENT LISTENERS
+ static initTaskButtons() {
+  const taskButtons = document.querySelectorAll('[data-task-button]')
+  taskButtons.forEach((taskButton) =>
+    taskButton.addEventListener('click', UI.handleTaskButton)
+  )
 }
+
+ static handleTaskButton(e) {
+  if (e.target.classList.contains('fa-times')) {
+    UI.deleteTask(this)
+  }
+}
+
+ static deleteTask(taskButton) {
+  const projectName = document.getElementById('project-name').textContent
+  const taskName = taskButton.children[0].children[1].textContent
+  console.log(taskButton)
+  console.log(taskName)
+
+  if (projectName === 'Today' || projectName === 'This week') {
+    const mainProjectName = taskName.split('(')[1].split(')')[0]
+    console.log(mainProjectName)
+    Storage.deleteTask(mainProjectName, taskName)
+  }
+
+
+
+  Storage.deleteTask(projectName, taskName)
+  UI.clearTasks()
+  UI.loadTasks(projectName)
+}
+
+
+
+}
+
+
 
 
 

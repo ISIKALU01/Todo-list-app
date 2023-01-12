@@ -16,7 +16,7 @@ export default class Storage {
       project.getTasks().map((task) => Object.assign(new Task(), task))
     )
   )
-
+  console.log(todoList)
     return todoList
   }
 
@@ -44,7 +44,7 @@ export default class Storage {
     Storage.saveTodoList(todoList)
   }
 
-  
+
 
 
 }

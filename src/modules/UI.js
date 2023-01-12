@@ -28,7 +28,7 @@ export default class UI {
     Storage.getTodoList()
       .getProject(projectName)
       .getTasks()
-      .forEach((task) => UI.createTask(task.name, task.dueDate))
+      .forEach((task) => UI.createTask(task.name, task.dueDate, task.priority, task.description))//????????
 
     if (projectName !== 'Today' && projectName !== 'This week') {
       UI.initAddTaskButtons()
@@ -51,9 +51,6 @@ export default class UI {
         <div class="add-task-popup" id="add-task-popup">
           <label for= "task-name">Task Name:</label>
           <input class="input-add-task-popup" id="input-add-task-popup" type="text" placeholder= "Task Name"/>
-
-          <label for="date">Due date:</label>
-          <input type= "date" id= "due-date" name= "due-date"/>
 
           <label for= "priority">Priority:</label>
           
@@ -111,13 +108,19 @@ export default class UI {
         <div class="middle-task-panel">
           <p class="task-level">Priority:${priority}</p>
         </div>
+        <div class="second-middle-task-panel">
+          <i class="fa fa-folder" aria-hidden="true"></i>
+        </div>
         <div class="right-task-panel">
           <p class="due-date" id="due-date">${dueDate}</p>
           <input type="date" class="input-due-date" data-input-due-date>
           <i class="fas fa-times"></i>
         </div>
       </button>
-      <div class="description">${description}</div>`
+      <div class="description">
+        <p>${description}</p>
+        <i class="fas fa-times"></i>
+      </div>`
 
       UI.initTaskButtons()
   }
@@ -323,7 +326,7 @@ export default class UI {
   }
 
   Storage.addTask(projectName, new Task(addTaskPopupInput, addTaskDate, addTaskPriority, addTaskDescription))
-  UI.createTask(addTaskPopupInput, addTaskDate, addTaskPriority, addTaskDescription)
+  UI.createTask(addTaskPopupInput, "No date", addTaskPriority, addTaskDescription)
   UI.closeAddTaskPopup()
  }
 

@@ -247,7 +247,8 @@ label{
 textarea {
   width: 100%;
   margin-bottom: 10px;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 20px;
 }
 
 
@@ -356,3 +357,15 @@ textarea {
   visibility: visible;
 }
 
+
+
+.description {
+  border: 1px solid antiquewhite;
+  background-color: white;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

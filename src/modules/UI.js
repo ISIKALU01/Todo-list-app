@@ -311,13 +311,6 @@ export default class UI {
    const addTaskPriority = document.getElementById('priority').value
    const addTaskDescription = document.getElementById('description').value
 
- 
-   
-   console.log(addTaskPopupInput)
-   console.log(addTaskDate)
-   console.log(addTaskPriority)
-   console.log(addTaskDescription)
-
    if (addTaskPopupInput === '') {
     alert("Task name can't be empty")
     return
@@ -356,23 +349,11 @@ export default class UI {
  static deleteTask(taskButton) {
   const projectName = document.getElementById('project-name').textContent
   const taskName = taskButton.children[0].children[1].textContent
-  console.log(taskButton)
-  console.log(taskName)
-
-  if (projectName === 'Today' || projectName === 'This week') {
-    const mainProjectName = taskName.split('(')[1].split(')')[0]
-    console.log(mainProjectName)
-    Storage.deleteTask(mainProjectName, taskName)
-  }
-
-
 
   Storage.deleteTask(projectName, taskName)
   UI.clearTasks()
   UI.loadTasks(projectName)
-}
-
-
+ }
 
 }
 

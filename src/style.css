@@ -360,11 +360,15 @@ textarea {
 
 
 .description {
+  display: none;
   border: 1px solid antiquewhite;
   background-color: white;
   padding: 10px;
   margin-bottom: 10px;
   border-radius: 5px;
+}
+
+.description.active {
   display: flex;
   align-items: center;
   justify-content: space-between;

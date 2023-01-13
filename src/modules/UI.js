@@ -99,6 +99,7 @@ export default class UI {
   static createTask(name, dueDate, priority, description) {
     const tasksList = document.getElementById('tasks-list')
     tasksList.innerHTML += `
+    <div class= "container">
       <button class="button-task" data-task-button>
         <div class="left-task-panel">
           <i class="far fa-circle"></i>
@@ -120,7 +121,8 @@ export default class UI {
       <div class="description">
         <p>${description}</p>
         <i class="fas fa-times"></i>
-      </div>`
+      </div>
+    </div>`
 
       UI.initTaskButtons()
   }
@@ -310,7 +312,6 @@ export default class UI {
   static addTask(){
    const projectName = document.getElementById('project-name').textContent
    const addTaskPopupInput = document.getElementById('input-add-task-popup').value
-   const addTaskDate = document.getElementById('due-date').value
    const addTaskPriority = document.getElementById('priority').value
    const addTaskDescription = document.getElementById('description').value
 
@@ -325,7 +326,7 @@ export default class UI {
     return
   }
 
-  Storage.addTask(projectName, new Task(addTaskPopupInput, addTaskDate, addTaskPriority, addTaskDescription))
+  Storage.addTask(projectName, new Task(addTaskPopupInput, "No date", addTaskPriority, addTaskDescription))
   UI.createTask(addTaskPopupInput, "No date", addTaskPriority, addTaskDescription)
   UI.closeAddTaskPopup()
  }
@@ -338,14 +339,25 @@ export default class UI {
  //TASK EVENT LISTENERS
  static initTaskButtons() {
   const taskButtons = document.querySelectorAll('[data-task-button]')
+  const descriptions = document.querySelectorAll('.description')
   taskButtons.forEach((taskButton) =>
     taskButton.addEventListener('click', UI.handleTaskButton)
+  )
+
+  descriptions.forEach((description) => 
+    description.addEventListener("click", UI.handleDescriptionPopup)
   )
 }
 
  static handleTaskButton(e) {
   if (e.target.classList.contains('fa-times')) {
     UI.deleteTask(this)
+  }
+
+  if (e.target.classList.contains('fa-folder')) {
+    const description = e.target.parentElement.parentElement.parentElement.children[1]
+    console.log(description)
+    description.classList.add('active')
   }
 }
 
@@ -357,6 +369,15 @@ export default class UI {
   UI.clearTasks()
   UI.loadTasks(projectName)
  }
+
+
+ static handleDescriptionPopup(e){
+  if (e.target.classList.contains('fa-times')) {
+    console.log(e.target)
+    this.classList.remove('active')
+  }
+ }
+
 
 }
 

@@ -339,10 +339,11 @@ textarea {
   padding: 5px;
   border: 1px solid #555;
   margin: 0 10px;
-  background-color: var(--primary-light);
+  background-color: white;
   color: inherit;
   font-family: inherit;
 }
+
 
 .input-due-date.active {
   display: block;
@@ -366,6 +367,7 @@ textarea {
   padding: 10px;
   margin-bottom: 10px;
   border-radius: 5px;
+  cursor: pointer;
 }
 
 .description.active {

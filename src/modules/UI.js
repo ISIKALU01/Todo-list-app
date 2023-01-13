@@ -108,6 +108,11 @@ export default class UI {
         </div>
         <div class="middle-task-panel">
           <p class="task-level">Priority:${priority}</p>
+          <select class="priority" name="priority" id= "priority" >
+            <option class= "low" value="low">Low</option>
+            <option class= "medium" value="medium">Medium</option>
+            <option class= "high" value="high">High</option>
+          </select>
         </div>
         <div class="second-middle-task-panel">
           <i class="fa fa-folder" aria-hidden="true"></i>
@@ -336,10 +341,16 @@ export default class UI {
  }
 
 
+
+
+
+
  //TASK EVENT LISTENERS
  static initTaskButtons() {
   const taskButtons = document.querySelectorAll('[data-task-button]')
+  const dueDateInputs = document.querySelectorAll('[data-input-due-date]')
   const descriptions = document.querySelectorAll('.description')
+  
   taskButtons.forEach((taskButton) =>
     taskButton.addEventListener('click', UI.handleTaskButton)
   )
@@ -347,6 +358,10 @@ export default class UI {
   descriptions.forEach((description) => 
     description.addEventListener("click", UI.handleDescriptionPopup)
   )
+
+  dueDateInputs.forEach((dueDateInput) =>
+      dueDateInput.addEventListener('change', UI.setTaskDate)
+    )
 }
 
  static handleTaskButton(e) {
@@ -358,6 +373,10 @@ export default class UI {
     const description = e.target.parentElement.parentElement.parentElement.children[1]
     console.log(description)
     description.classList.add('active')
+  }
+
+  if (e.target.classList.contains('due-date')) {
+    UI.openSetDateInput(this)
   }
 }
 
@@ -378,6 +397,33 @@ export default class UI {
   }
  }
 
+ static openSetDateInput(taskButton) {
+  const dueDate = taskButton.children[3].children[0]
+  const dueDateInput = taskButton.children[3].children[1]
+  dueDate.classList.add('active')
+  dueDateInput.classList.add('active')
+}
+
+ static closeSetDateInput(taskButton) {
+  const dueDate = taskButton.children[3].children[0]
+  const dueDateInput = taskButton.children[3].children[1]
+
+  dueDate.classList.remove('active')
+  dueDateInput.classList.remove('active')
+}
+
+ static setTaskDate() {
+  const taskButton = this.parentNode.parentNode
+  const projectName = document.getElementById('project-name').textContent
+  const taskName = taskButton.children[0].children[1].textContent
+  const newDueDate = format(new Date(this.value), 'dd/MM/yyyy')
+
+  Storage.setTaskDate(projectName, taskName, newDueDate)
+
+  UI.clearTasks()
+  UI.loadTasks(projectName)
+  UI.closeSetDateInput(taskButton)
+ }
 
 }
 

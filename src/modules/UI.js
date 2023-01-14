@@ -147,6 +147,15 @@ export default class UI {
     tasksList.textContent = ''
   }
 
+  static closeAllInputs() {
+    const taskButtons = document.querySelectorAll('[data-task-button]')
+
+    taskButtons.forEach((button) => {
+      UI.closeRenameInput(button)
+      UI.closeSetDateInput(button)
+    })
+  }
+
 
 
   
@@ -348,12 +357,17 @@ export default class UI {
  //TASK EVENT LISTENERS
  static initTaskButtons() {
   const taskButtons = document.querySelectorAll('[data-task-button]')
+  const taskNameInputs = document.querySelectorAll('[data-input-task-name')
   const dueDateInputs = document.querySelectorAll('[data-input-due-date]')
   const descriptions = document.querySelectorAll('.description')
   
   taskButtons.forEach((taskButton) =>
     taskButton.addEventListener('click', UI.handleTaskButton)
   )
+
+  taskNameInputs.forEach((taskNameInput) =>
+      taskNameInput.addEventListener('keypress', UI.renameTask)
+    )
 
   descriptions.forEach((description) => 
     description.addEventListener("click", UI.handleDescriptionPopup)
@@ -366,18 +380,26 @@ export default class UI {
 
  static handleTaskButton(e) {
   if (e.target.classList.contains('fa-times')) {
+    console.log(e.target)
     UI.deleteTask(this)
   }
 
   if (e.target.classList.contains('fa-folder')) {
     const description = e.target.parentElement.parentElement.parentElement.children[1]
-    console.log(description)
     description.classList.add('active')
   }
 
   if (e.target.classList.contains('due-date')) {
+    console.log(e.target)
     UI.openSetDateInput(this)
   }
+
+  if (e.target.classList.contains('task-content')) {
+    console.log(e.target)
+    UI.openRenameInput(this)
+    return
+  }
+
 }
 
  static deleteTask(taskButton) {
@@ -400,14 +422,17 @@ export default class UI {
  static openSetDateInput(taskButton) {
   const dueDate = taskButton.children[3].children[0]
   const dueDateInput = taskButton.children[3].children[1]
+
+  UI.closeAllInputs()
   dueDate.classList.add('active')
   dueDateInput.classList.add('active')
+
+
 }
 
  static closeSetDateInput(taskButton) {
   const dueDate = taskButton.children[3].children[0]
   const dueDateInput = taskButton.children[3].children[1]
-
   dueDate.classList.remove('active')
   dueDateInput.classList.remove('active')
 }
@@ -425,6 +450,54 @@ export default class UI {
   UI.closeSetDateInput(taskButton)
  }
 
+ static openRenameInput(taskButton) {
+  const taskNameParagraph = taskButton.children[0].children[1]
+  let taskName = taskNameParagraph.textContent
+  const taskNameInput = taskButton.children[0].children[2]
+  const projectName = taskButton.parentNode.parentNode.children[0].textContent
+
+  UI.closeAllInputs()
+
+  taskNameParagraph.classList.add('active')
+  taskNameInput.classList.add('active')
+  taskNameInput.value = taskName
+ }
+
+ static closeRenameInput(taskButton) {
+  const taskName = taskButton.children[0].children[1]
+  const taskNameInput = taskButton.children[0].children[2]
+
+  taskName.classList.remove('active')
+  taskNameInput.classList.remove('active')
+  taskNameInput.value = ''
+ }
+
+ static renameTask(e) {
+  if (e.key !== 'Enter') return
+
+  const projectName = document.getElementById('project-name').textContent
+  const taskName = this.previousElementSibling.textContent
+  console.log(this)
+  const newTaskName = this.value
+
+  if (newTaskName === '') {
+    alert("Task name can't be empty")
+    return
+  }
+
+  if (Storage.getTodoList().getProject(projectName).contains(newTaskName)) {
+    this.value = ''
+    alert('Task names must be different')
+    return
+  }
+
+  Storage.renameTask(projectName, taskName, newTaskName)
+
+
+  UI.clearTasks()
+  UI.loadTasks(projectName)
+  UI.closeRenameInput(this.parentNode.parentNode)
+ }
 }
 
 

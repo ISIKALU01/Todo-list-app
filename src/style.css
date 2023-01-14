@@ -319,6 +319,27 @@ textarea {
   display: block;
 }
 
+.middle-task-panel{
+  display: flex;
+  align-items: center;
+}
+
+.task-level {
+  cursor: pointer;
+}
+
+.task-level.active {
+  display: none;
+}
+
+.priority {
+  display: none;
+}
+
+.priority.active {
+  display: block;
+}
+
 .right-task-panel {
   display: flex;
   align-items: center;

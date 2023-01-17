@@ -52,7 +52,15 @@ export default class Storage {
 
   static setTaskDate(projectName, taskName, newDueDate) {
     const todoList = Storage.getTodoList()
+    console.log(todoList.getProject(projectName).getTask(taskName))
     todoList.getProject(projectName).getTask(taskName).setDate(newDueDate)
+    Storage.saveTodoList(todoList)
+  }
+
+  static resetTaskLevel(projectName, taskName, newTaskLevel) {
+    const todoList = Storage.getTodoList()
+    console.log(todoList.getProject(projectName).getTask(taskName))
+    todoList.getProject(projectName).getTask(taskName).setPriority(newTaskLevel)
     Storage.saveTodoList(todoList)
   }
 

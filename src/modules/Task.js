@@ -1,5 +1,5 @@
 export default class Task {
-    constructor(name, dueDate = 'No date', priority, description) {
+    constructor(name, dueDate, priority, description) {
       this.name = name
       this.dueDate = dueDate
       this.priority = priority
@@ -23,19 +23,19 @@ export default class Task {
     }
 
     setPriority(priority){
-        this.priority = priority
+      this.priority = priority
     }
 
     getPriority() {
-        return this.priority 
+      return this.priority 
     }
 
     setDescription(description){
-        this.description = description
+      this.description = description
     }
 
     getDescription(){
-        return this.description
+      return this.description
     }
 }
 

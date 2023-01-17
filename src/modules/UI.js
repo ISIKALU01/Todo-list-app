@@ -54,7 +54,7 @@ export default class UI {
 
           <label for= "priority">Priority:</label>
           
-          <select class="priority" name="priority" id= "priority" >
+          <select class="priority-select" name="priority" id= "priority" >
             <option class= "low" value="low">Low</option>
             <option class= "medium" value="medium">Medium</option>
             <option class= "high" value="high">High</option>
@@ -357,7 +357,8 @@ export default class UI {
  //TASK EVENT LISTENERS
  static initTaskButtons() {
   const taskButtons = document.querySelectorAll('[data-task-button]')
-  const taskNameInputs = document.querySelectorAll('[data-input-task-name')
+  const taskNameInputs = document.querySelectorAll('[data-input-task-name]')
+  const taskLevelOptions = document.querySelectorAll('select')
   const dueDateInputs = document.querySelectorAll('[data-input-due-date]')
   const descriptions = document.querySelectorAll('.description')
   
@@ -366,8 +367,13 @@ export default class UI {
   )
 
   taskNameInputs.forEach((taskNameInput) =>
-      taskNameInput.addEventListener('keypress', UI.renameTask)
-    )
+    taskNameInput.addEventListener('keypress', UI.renameTask)
+  )
+  
+
+  taskLevelOptions.forEach((taskLevel) => 
+    taskLevel.addEventListener('change', UI.resetTaskLevel)
+  )
 
   descriptions.forEach((description) => 
     description.addEventListener("click", UI.handleDescriptionPopup)
@@ -382,6 +388,10 @@ export default class UI {
   if (e.target.classList.contains('fa-times')) {
     console.log(e.target)
     UI.deleteTask(this)
+  }
+
+  if (e.target.classList.contains('task-level')) {
+    UI.openPrioritySelect(this)
   }
 
   if (e.target.classList.contains('fa-folder')) {
@@ -426,8 +436,6 @@ export default class UI {
   UI.closeAllInputs()
   dueDate.classList.add('active')
   dueDateInput.classList.add('active')
-
-
 }
 
  static closeSetDateInput(taskButton) {
@@ -477,8 +485,8 @@ export default class UI {
 
   const projectName = document.getElementById('project-name').textContent
   const taskName = this.previousElementSibling.textContent
-  console.log(this)
   const newTaskName = this.value
+  console.log(taskName)
 
   if (newTaskName === '') {
     alert("Task name can't be empty")
@@ -498,6 +506,43 @@ export default class UI {
   UI.loadTasks(projectName)
   UI.closeRenameInput(this.parentNode.parentNode)
  }
+
+ static openPrioritySelect(taskButton) {
+  const taskLevel = taskButton.children[1].children[0]
+  const taskLevelSelect = taskButton.children[1].children[1]
+  const taskLevelValue = taskButton.children[1].children[0].textContent.split(':')[1]
+  console.log(taskLevelValue)
+ 
+  taskLevel.classList.add('active')
+  taskLevelSelect.classList.add('active')
+  taskLevelSelect.value = taskLevelValue
+ }
+
+
+ static closePrioritySelect(taskButton) {
+  const taskLevel = taskButton.children[1].children[0]
+  const taskLevelSelect = taskButton.children[1].children[1]
+
+  taskLevel.classList.add('active')
+  taskLevelSelect.classList.add('active')
+ }
+
+
+
+ static resetTaskLevel(e) {
+  const projectName = document.getElementById('project-name').textContent
+  const taskName = this.parentNode.previousElementSibling.children[1].textContent
+  console.log(taskName)
+
+  const newTaskLevel = this.value
+
+  Storage.resetTaskLevel(projectName, taskName, newTaskLevel)
+
+  UI.clearTasks()
+  UI.loadTasks(projectName)
+  UI.closePrioritySelect(this.parentNode.parentNode)
+ }
+
 }
 
 

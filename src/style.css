@@ -384,7 +384,7 @@ textarea {
 .description {
   display: none;
   border: 1px solid antiquewhite;
-  background-color: white;
+  background-color: rgb(136, 179, 149);
   padding: 10px;
   margin-bottom: 10px;
   border-radius: 5px;
@@ -392,7 +392,37 @@ textarea {
 }
 
 .description.active {
-  display: flex;
+  display: flex; 
   align-items: center;
   justify-content: space-between;
+}
+
+
+.description-content {
+  display: block;
+}
+
+.description-content.active {
+  display: none;
+}
+
+
+.input-description {
+  display: none;
+}
+
+.input-description.active {
+  display: block;
+}
+
+.description i {
+  visibility: hidden;
+}
+
+.description:hover i {
+  visibility: visible;
+}
+
+.description i.active {
+  display: none;
 }

@@ -124,13 +124,49 @@ export default class UI {
         </div>
       </button>
       <div class="description">
-        <p>${description}</p>
-        <i class="fas fa-times"></i>
+        <div class= "description-content">${description}</div>
+        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+        <input type="text" class="input-description" data-input-description>
       </div>
     </div>`
 
       UI.initTaskButtons()
+      UI.initDescription()
   }
+
+  static initDescription() {
+    const descriptions = document.querySelectorAll('.description')
+    descriptions.forEach((description) => 
+      description.addEventListener('click', UI.handleDescription)
+    )
+
+  }
+
+  static handleDescription(e) {
+    const descriptionContent = this.children[0]
+    const descriptionText = this.children[0].innerHTML
+    const descriptionInput = this.children[2]
+ 
+    
+    if(this.children[1].classList.contains('fa-pencil-square-o')) {
+      this.children[0].classList.add('active')
+      this.children[1].classList.add('active')
+      this.children[2].classList.add('active')
+    }
+
+    console.log(descriptionContent)
+    console.log(descriptionText)
+    console.log(descriptionInput)
+
+    //descriptionContent.classList.add('active')
+    //descriptionInput.classList.add('active')
+    this.children[2].value = descriptionText
+    
+ 
+ 
+  }
+
+ 
 
   static clearProjects() {
     const projectsList = document.getElementById('projects-list')
@@ -153,6 +189,7 @@ export default class UI {
     taskButtons.forEach((button) => {
       UI.closeRenameInput(button)
       UI.closeSetDateInput(button)
+      UI.closePrioritySelect(button)
     })
   }
 
@@ -375,9 +412,6 @@ export default class UI {
     taskLevel.addEventListener('change', UI.resetTaskLevel)
   )
 
-  descriptions.forEach((description) => 
-    description.addEventListener("click", UI.handleDescriptionPopup)
-  )
 
   dueDateInputs.forEach((dueDateInput) =>
       dueDateInput.addEventListener('change', UI.setTaskDate)
@@ -396,16 +430,17 @@ export default class UI {
 
   if (e.target.classList.contains('fa-folder')) {
     const description = e.target.parentElement.parentElement.parentElement.children[1]
-    description.classList.add('active')
+    //const descriptionTag = e.target.parentElement.parentElement.parentElement.children[1].children[0]
+    description.classList.toggle('active')
+  
+    //descriptionTag.classList.toggle('active')
   }
 
   if (e.target.classList.contains('due-date')) {
-    console.log(e.target)
     UI.openSetDateInput(this)
   }
 
   if (e.target.classList.contains('task-content')) {
-    console.log(e.target)
     UI.openRenameInput(this)
     return
   }
@@ -421,13 +456,14 @@ export default class UI {
   UI.loadTasks(projectName)
  }
 
-
+ /*
  static handleDescriptionPopup(e){
   if (e.target.classList.contains('fa-times')) {
     console.log(e.target)
     this.classList.remove('active')
   }
  }
+ */
 
  static openSetDateInput(taskButton) {
   const dueDate = taskButton.children[3].children[0]
@@ -510,12 +546,12 @@ export default class UI {
  static openPrioritySelect(taskButton) {
   const taskLevel = taskButton.children[1].children[0]
   const taskLevelSelect = taskButton.children[1].children[1]
-  const taskLevelValue = taskButton.children[1].children[0].textContent.split(':')[1]
-  console.log(taskLevelValue)
+
+  UI.closeAllInputs()
  
   taskLevel.classList.add('active')
   taskLevelSelect.classList.add('active')
-  taskLevelSelect.value = taskLevelValue
+  taskLevelSelect.value = ""
  }
 
 
@@ -523,8 +559,8 @@ export default class UI {
   const taskLevel = taskButton.children[1].children[0]
   const taskLevelSelect = taskButton.children[1].children[1]
 
-  taskLevel.classList.add('active')
-  taskLevelSelect.classList.add('active')
+  taskLevel.classList.remove('active')
+  taskLevelSelect.classList.remove('active')
  }
 
 
@@ -532,10 +568,9 @@ export default class UI {
  static resetTaskLevel(e) {
   const projectName = document.getElementById('project-name').textContent
   const taskName = this.parentNode.previousElementSibling.children[1].textContent
-  console.log(taskName)
-
   const newTaskLevel = this.value
 
+  
   Storage.resetTaskLevel(projectName, taskName, newTaskLevel)
 
   UI.clearTasks()

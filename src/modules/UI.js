@@ -146,25 +146,57 @@ export default class UI {
     const descriptionContent = this.children[0]
     const descriptionText = this.children[0].innerHTML
     const descriptionInput = this.children[2]
- 
     
-    if(this.children[1].classList.contains('fa-pencil-square-o')) {
+
+    if(e.target.classList.contains('fa-pencil-square-o')){
       this.children[0].classList.add('active')
       this.children[1].classList.add('active')
       this.children[2].classList.add('active')
     }
 
+    if(e.target.classList.contains('input-description'))return
+
+   
+
     console.log(descriptionContent)
     console.log(descriptionText)
     console.log(descriptionInput)
 
-    //descriptionContent.classList.add('active')
-    //descriptionInput.classList.add('active')
     this.children[2].value = descriptionText
-    
- 
- 
   }
+
+  static renameDescription(e){
+    if(e.key !== 'Enter')return
+
+    const projectName = document.getElementById('project-name').textContent
+    const taskName = this.parentElement.parentElement.children[0].children[0].children[1].textContent
+    const taskDescription = this.parentElement.children[0].textContent
+    const newDescriptionContent = this.value
+
+    if (newDescriptionContent === '') {
+      alert("description can't be empty")
+      return
+    }
+  
+    if (taskDescription === newDescriptionContent) {
+      alert('you are yet to change description')
+    }
+
+   
+
+    console.log(newDescriptionContent)
+    console.log(taskDescription)
+
+    Storage.renameDescription(projectName, taskName, newDescriptionContent)
+
+
+    UI.clearTasks()
+    UI.loadTasks(projectName)
+    //UI.closeRenameInput(this.parentNode.parentNode)
+  }
+
+  
+  
 
  
 
@@ -397,7 +429,7 @@ export default class UI {
   const taskNameInputs = document.querySelectorAll('[data-input-task-name]')
   const taskLevelOptions = document.querySelectorAll('select')
   const dueDateInputs = document.querySelectorAll('[data-input-due-date]')
-  const descriptions = document.querySelectorAll('.description')
+  const descriptions = document.querySelectorAll('.input-description')
   
   taskButtons.forEach((taskButton) =>
     taskButton.addEventListener('click', UI.handleTaskButton)
@@ -414,8 +446,12 @@ export default class UI {
 
 
   dueDateInputs.forEach((dueDateInput) =>
-      dueDateInput.addEventListener('change', UI.setTaskDate)
-    )
+    dueDateInput.addEventListener('change', UI.setTaskDate)
+  )
+
+  descriptions.forEach((description) => 
+     description.addEventListener('keypress', UI.renameDescription)
+   )
 }
 
  static handleTaskButton(e) {
@@ -520,6 +556,7 @@ export default class UI {
   if (e.key !== 'Enter') return
 
   const projectName = document.getElementById('project-name').textContent
+  console.log(projectName)
   const taskName = this.previousElementSibling.textContent
   const newTaskName = this.value
   console.log(taskName)

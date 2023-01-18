@@ -64,6 +64,12 @@ export default class Storage {
     Storage.saveTodoList(todoList)
   }
 
+  static renameDescription(projectName, taskName, newTaskDescription) {
+    const todoList = Storage.getTodoList()
+    todoList.getProject(projectName).getTask(taskName).setDescription(newTaskDescription)
+    Storage.saveTodoList(todoList)
+  }
+
 
 
 

@@ -147,7 +147,6 @@ export default class UI {
     const descriptionText = this.children[0].innerHTML
     const descriptionInput = this.children[2]
     
-
     if(e.target.classList.contains('fa-pencil-square-o')){
       this.children[0].classList.add('active')
       this.children[1].classList.add('active')
@@ -156,14 +155,13 @@ export default class UI {
 
     if(e.target.classList.contains('input-description'))return
 
-   
-
     console.log(descriptionContent)
     console.log(descriptionText)
     console.log(descriptionInput)
 
     this.children[2].value = descriptionText
   }
+
 
   static renameDescription(e){
     if(e.key !== 'Enter')return
@@ -172,6 +170,8 @@ export default class UI {
     const taskName = this.parentElement.parentElement.children[0].children[0].children[1].textContent
     const taskDescription = this.parentElement.children[0].textContent
     const newDescriptionContent = this.value
+
+    
 
     if (newDescriptionContent === '') {
       alert("description can't be empty")
@@ -192,11 +192,12 @@ export default class UI {
 
     UI.clearTasks()
     UI.loadTasks(projectName)
+    //UI.openDescription()
     //UI.closeRenameInput(this.parentNode.parentNode)
   }
 
   
-  
+ 
 
  
 
@@ -222,7 +223,10 @@ export default class UI {
       UI.closeRenameInput(button)
       UI.closeSetDateInput(button)
       UI.closePrioritySelect(button)
+      UI.closeDescription(button)
     })
+
+    
   }
 
 
@@ -465,11 +469,7 @@ export default class UI {
   }
 
   if (e.target.classList.contains('fa-folder')) {
-    const description = e.target.parentElement.parentElement.parentElement.children[1]
-    //const descriptionTag = e.target.parentElement.parentElement.parentElement.children[1].children[0]
-    description.classList.toggle('active')
-  
-    //descriptionTag.classList.toggle('active')
+    UI.openDescription(this)
   }
 
   if (e.target.classList.contains('due-date')) {
@@ -482,6 +482,19 @@ export default class UI {
   }
 
 }
+ static openDescription(taskButton) {
+  const description = taskButton.parentElement.children[1]
+  console.log(description)
+
+  UI.closeAllInputs()
+
+  description.classList.add('active')
+ }
+
+ static closeDescription(taskButton) {
+  const description = taskButton.parentElement.children[1]
+  description.classList.remove('active')
+ }
 
  static deleteTask(taskButton) {
   const projectName = document.getElementById('project-name').textContent

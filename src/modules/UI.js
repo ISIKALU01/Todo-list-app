@@ -115,7 +115,7 @@ export default class UI {
           </select>
         </div>
         <div class="second-middle-task-panel">
-          <i class="fa fa-folder" aria-hidden="true"></i>
+          <i class="fa fa-file-text" aria-hidden="true"></i>
         </div>
         <div class="right-task-panel">
           <p class="due-date" id="due-date">${dueDate}</p>
@@ -468,7 +468,7 @@ export default class UI {
     UI.openPrioritySelect(this)
   }
 
-  if (e.target.classList.contains('fa-folder')) {
+  if (e.target.classList.contains('fa-file-text')) {
     UI.openDescription(this)
   }
 

@@ -384,11 +384,14 @@ textarea {
 .description {
   display: none;
   border: 1px solid antiquewhite;
-  background-color: rgb(136, 179, 149);
+  background-color: rgb(205, 228, 211);
   padding: 10px;
   margin-bottom: 10px;
   border-radius: 5px;
   cursor: pointer;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-style: italic;
+  color: rgb(34, 30, 30);
 }
 
 .description.active {

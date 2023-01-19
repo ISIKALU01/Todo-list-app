@@ -143,10 +143,6 @@ export default class UI {
   }
 
   static handleDescription(e) {
-    const descriptionContent = this.children[0]
-    const descriptionText = this.children[0].innerHTML
-    const descriptionInput = this.children[2]
-    
     if(e.target.classList.contains('fa-pencil-square-o')){
       this.children[0].classList.add('active')
       this.children[1].classList.add('active')
@@ -155,9 +151,6 @@ export default class UI {
 
     if(e.target.classList.contains('input-description'))return
 
-    console.log(descriptionContent)
-    console.log(descriptionText)
-    console.log(descriptionInput)
 
     this.children[2].value = descriptionText
   }
@@ -172,7 +165,6 @@ export default class UI {
     const newDescriptionContent = this.value
 
     
-
     if (newDescriptionContent === '') {
       alert("description can't be empty")
       return
@@ -182,18 +174,12 @@ export default class UI {
       alert('you are yet to change description')
     }
 
-   
-
-    console.log(newDescriptionContent)
-    console.log(taskDescription)
 
     Storage.renameDescription(projectName, taskName, newDescriptionContent)
 
 
     UI.clearTasks()
     UI.loadTasks(projectName)
-    //UI.openDescription()
-    //UI.closeRenameInput(this.parentNode.parentNode)
   }
 
   
@@ -379,9 +365,9 @@ export default class UI {
 
   static openAddTaskPopup(){
    const addTaskPopup = document.querySelector(".add-task-popup")
-   const addTaskButton = document.querySelector(".button-add-task")
   
    addTaskPopup.classList.add('active')
+
    UI.closeAllInputs()
 
   }
@@ -488,7 +474,6 @@ export default class UI {
 }
  static openDescription(taskButton) {
   const description = taskButton.parentElement.children[1]
-  console.log(description)
 
   UI.closeAllInputs()
 
@@ -509,14 +494,6 @@ export default class UI {
   UI.loadTasks(projectName)
  }
 
- /*
- static handleDescriptionPopup(e){
-  if (e.target.classList.contains('fa-times')) {
-    console.log(e.target)
-    this.classList.remove('active')
-  }
- }
- */
 
  static openSetDateInput(taskButton) {
   const dueDate = taskButton.children[3].children[0]
@@ -548,14 +525,13 @@ export default class UI {
  }
 
  static openRenameInput(taskButton) {
-  const taskNameParagraph = taskButton.children[0].children[1]
-  let taskName = taskNameParagraph.textContent
+  const taskNameParaTag = taskButton.children[0].children[1]
+  let taskName = taskNameParaTag.textContent
   const taskNameInput = taskButton.children[0].children[2]
-  const projectName = taskButton.parentNode.parentNode.children[0].textContent
 
   UI.closeAllInputs()
 
-  taskNameParagraph.classList.add('active')
+  taskNameParaTag.classList.add('active')
   taskNameInput.classList.add('active')
   taskNameInput.value = taskName
  }
@@ -571,12 +547,10 @@ export default class UI {
 
  static renameTask(e) {
   if (e.key !== 'Enter') return
-
   const projectName = document.getElementById('project-name').textContent
-  console.log(projectName)
   const taskName = this.previousElementSibling.textContent
   const newTaskName = this.value
-  console.log(taskName)
+ 
 
   if (newTaskName === '') {
     alert("Task name can't be empty")

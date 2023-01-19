@@ -156,32 +156,7 @@ export default class UI {
   }
 
 
-  static renameDescription(e){
-    if(e.key !== 'Enter')return
-
-    const projectName = document.getElementById('project-name').textContent
-    const taskName = this.parentElement.parentElement.children[0].children[0].children[1].textContent
-    const taskDescription = this.parentElement.children[0].textContent
-    const newDescriptionContent = this.value
-
-    
-    if (newDescriptionContent === '') {
-      alert("description can't be empty")
-      return
-    }
   
-    if (taskDescription === newDescriptionContent) {
-      alert('you are yet to change description')
-    }
-
-
-    Storage.renameDescription(projectName, taskName, newDescriptionContent)
-
-
-    UI.clearTasks()
-    UI.loadTasks(projectName)
-  }
-
   
  
 
@@ -604,6 +579,35 @@ export default class UI {
   UI.clearTasks()
   UI.loadTasks(projectName)
   UI.closePrioritySelect(this.parentNode.parentNode)
+ }
+
+
+
+ static renameDescription(e){
+  if(e.key !== 'Enter')return
+
+  const projectName = document.getElementById('project-name').textContent
+  const taskName = this.parentElement.parentElement.children[0].children[0].children[1].textContent
+  const taskDescription = this.parentElement.children[0].textContent
+  const newDescriptionContent = this.value
+
+  
+  if (newDescriptionContent === '') {
+    alert("description can't be empty")
+    return
+  }
+
+  if (taskDescription === newDescriptionContent) {
+    alert('you are yet to change description')
+  }
+
+
+  Storage.renameDescription(projectName, taskName, newDescriptionContent)
+
+
+  UI.clearTasks()
+  UI.loadTasks(projectName)
+
  }
 
 }

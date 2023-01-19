@@ -298,7 +298,9 @@ textarea {
 }
 
 .task-content {
+  width: 200px;
   cursor: pointer;
+  text-align: left;
 }
 
 .task-content.active {
@@ -379,6 +381,10 @@ textarea {
   visibility: visible;
 }
 
+.fa-file-text {
+  cursor: pointer;
+}
+
 
 
 .description {
@@ -388,7 +394,6 @@ textarea {
   padding: 10px;
   margin-bottom: 10px;
   border-radius: 5px;
-  cursor: pointer;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-style: italic;
   color: rgb(34, 30, 30);
@@ -420,6 +425,7 @@ textarea {
 
 .description i {
   visibility: hidden;
+  cursor: pointer;
 }
 
 .description:hover i {

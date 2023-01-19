@@ -382,6 +382,7 @@ export default class UI {
    const addTaskButton = document.querySelector(".button-add-task")
   
    addTaskPopup.classList.add('active')
+   UI.closeAllInputs()
 
   }
 
@@ -389,10 +390,13 @@ export default class UI {
   static closeAddTaskPopup() {
    const addTaskPopup = document.getElementById('add-task-popup')
    const addTaskInput = document.getElementById('input-add-task-popup')
-   const addTaskButton = document.getElementById('button-add-task')
+   const select = document.querySelector('.priority-select')
+   const textarea = document.querySelector('textarea')
 
    addTaskPopup.classList.remove('active')
    addTaskInput.value = ''
+   select.value = 'low'
+   textarea.value = ''
    
  }
 

@@ -143,6 +143,8 @@ export default class UI {
   }
 
   static handleDescription(e) {
+    const descriptionText = this.children[0].innerHTML
+
     if(e.target.classList.contains('fa-pencil-square-o')){
       this.children[0].classList.add('active')
       this.children[1].classList.add('active')
@@ -274,12 +276,34 @@ export default class UI {
   
   //PROJECT EVENT LISTENERS
   static initProjectButtons(){
+    const inboxProjectsButton = document.getElementById('inbox-button')
+    const todayProjectsButton = document.getElementById('today-button')
+    const weekProjectsButton = document.getElementById('week-button')
     const projectButtons = document.querySelectorAll(".button-project")
+
+
+    inboxProjectsButton.addEventListener('click', UI.openInboxTasks)
 
     projectButtons.forEach((projectButton) =>
     projectButton.addEventListener('click', UI.handleProjectButton)
 
     )
+  }
+
+  static openInboxTasks() {
+    UI.openProject('Inbox', this)
+  }
+
+
+  static openProject(projectName, projectButton) {
+    const defaultProjectButtons = document.querySelectorAll('.default-project-button')
+    const projectButtons = document.querySelectorAll('.button-project')
+    const buttons = [...defaultProjectButtons, ...projectButtons]
+
+    buttons.forEach((button) => button.classList.remove('active'))
+    projectButton.classList.add('active')
+    UI.closeAddProjectPopup()
+    UI.loadProjectContent(projectName)
   }
 
 
@@ -304,21 +328,6 @@ export default class UI {
     UI.openProject(projectName, this)
 
   }
-
-  static openProject(projectName, projectButton) {
-    const defaultProjectButtons = document.querySelectorAll('.default-project-button')
-    const projectButtons = document.querySelectorAll('.button-project')
-    const buttons = [...defaultProjectButtons, ...projectButtons]
-
-    buttons.forEach((button) => button.classList.remove('active'))
-    projectButton.classList.add('active')
-    UI.closeAddProjectPopup()
-    UI.loadProjectContent(projectName)
-  }
-
-
-
-
 
 
 

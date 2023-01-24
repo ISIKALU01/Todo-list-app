@@ -38,4 +38,11 @@ export default class Project {
   deleteTask(taskName) {
     this.tasks = this.tasks.filter((task) => task.name !== taskName)
   }
+
+  getTasksToday() {
+    return this.tasks.filter((task) => {
+      const taskDate = new Date(task.getDateFormatted())
+      return isToday(toDate(taskDate))
+    })
+  }
 }

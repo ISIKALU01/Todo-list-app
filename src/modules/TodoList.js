@@ -1,4 +1,5 @@
 import { compareAsc, toDate } from 'date-fns'
+import Task from './Task'
 import Project from './Project'
 
 export default class TodoList {
@@ -35,5 +36,19 @@ export default class TodoList {
     this.projects.splice(this.projects.indexOf(projectToDelete), 1)
   }
 
-  
+  updateTodayProject() {
+    this.getProject('Today').tasks = []
+
+    this.projects.forEach((project) => {
+      if (project.getName() === 'Today' || project.getName() === 'This week')
+        return
+
+      const todayTasks = project.getTasksToday()
+      console.log(todayTasks)
+      todayTasks.forEach((task) => {
+        const taskName = `${task.getName()} (${project.getName()})`
+        this.getProject('Today').addTask(new Task(taskName, task.getDate()))
+      })
+    })
+  }
 }

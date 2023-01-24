@@ -283,6 +283,7 @@ export default class UI {
 
 
     inboxProjectsButton.addEventListener('click', UI.openInboxTasks)
+    todayProjectsButton.addEventListener('click', UI.openTodayTasks)
 
     projectButtons.forEach((projectButton) =>
     projectButton.addEventListener('click', UI.handleProjectButton)
@@ -292,6 +293,11 @@ export default class UI {
 
   static openInboxTasks() {
     UI.openProject('Inbox', this)
+  }
+
+  static openTodayTasks() {
+    Storage.updateTodayProject()
+    UI.openProject('Today', this)
   }
 
 
@@ -444,6 +450,7 @@ export default class UI {
 
   if (e.target.classList.contains('fa-file-text')) {
     UI.openDescription(this)
+    //UI.toggleOpen(this)
   }
 
   if (e.target.classList.contains('due-date')) {
@@ -456,8 +463,19 @@ export default class UI {
   }
 
 }
+
+ static toggleOpen(taskButton){
+  const description = taskButton.parentElement.children[1]
+
+  description.classList.toggle('activate')
+}
+
  static openDescription(taskButton) {
   const description = taskButton.parentElement.children[1]
+  if(description.classList.contains('active')){
+    UI.closeAllInputs()
+    return
+  }
 
   UI.closeAllInputs()
 

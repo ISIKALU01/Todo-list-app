@@ -450,7 +450,7 @@ export default class UI {
 
   if (e.target.classList.contains('fa-file-text')) {
     UI.openDescription(this)
-    //UI.toggleOpen(this)
+    UI.closeAddTaskPopup()
   }
 
   if (e.target.classList.contains('due-date')) {
@@ -464,11 +464,7 @@ export default class UI {
 
 }
 
- static toggleOpen(taskButton){
-  const description = taskButton.parentElement.children[1]
 
-  description.classList.toggle('activate')
-}
 
  static openDescription(taskButton) {
   const description = taskButton.parentElement.children[1]
@@ -626,6 +622,10 @@ export default class UI {
 
   if (taskDescription === newDescriptionContent) {
     alert('you are yet to change description')
+  }
+
+  if (taskDescription !== newDescriptionContent) {
+    alert('Notes Changed')
   }
 
 

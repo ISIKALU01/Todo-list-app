@@ -390,12 +390,12 @@ textarea {
 .description {
   display: none;
   border: 1px solid antiquewhite;
-  background-color: rgb(205, 228, 211);
+  background-color: rgb(242, 247, 174);
   padding: 10px;
   margin-bottom: 10px;
   border-radius: 5px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-style: italic;
+  /* font-style: italic; */
   color: rgb(34, 30, 30);
 }
 

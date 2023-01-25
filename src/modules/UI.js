@@ -439,6 +439,10 @@ export default class UI {
 }
 
  static handleTaskButton(e) {
+  if (e.target.classList.contains('fa-circle')) {
+    UI.setTaskCompleted(this)
+  }
+
   if (e.target.classList.contains('fa-times')) {
     console.log(e.target)
     UI.deleteTask(this)
@@ -634,6 +638,33 @@ export default class UI {
 
   UI.clearTasks()
   UI.loadTasks(projectName)
+
+ }
+
+ static setTaskCompleted(taskButton) {
+  const projectName = document.getElementById('project-name')
+  const taskName = taskButton.children[0].children[1].textContent
+  const priority = taskButton.children[1].children[0]
+
+  console.log(priority)
+  const newPriorityStatus = document.createElement('div')
+  newPriorityStatus.innerHTML = `<p>DONE</P>`
+  console.log(typeof projectName)
+  console.log(typeof priority)
+  console.log(typeof newPriorityStatus)
+  priority.parentNode.replaceChild(newPriorityStatus, priority)
+
+  
+
+  let taskElement = taskButton.children[0].children[0]
+  taskElement.classList.remove('fa-circle')
+  taskElement.classList.add('fa-check-circle')
+  taskButton.classList.add('checked-background')
+  //taskElement = `<i class="fa fa-check-circle" aria-hidden="true"></i>`
+  //console.log(element)
+  taskElement.style.backgroundColor = 'green'
+  console.log(taskName)
+
 
  }
 

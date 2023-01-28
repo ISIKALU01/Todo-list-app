@@ -28,12 +28,27 @@ export default class UI {
     Storage.getTodoList()
       .getProject(projectName)
       .getTasks()
-      .forEach((task) => UI.createTask(task.name, task.dueDate, task.priority, task.description))//????????
+      .forEach((task) => 
+      UI.createTask(task.name, task.dueDate, task.priority, task.description))
 
     if (projectName !== 'Today' && projectName !== 'This week') {
       UI.initAddTaskButtons()
     }
   }
+
+  static loadDoneTasks(projectName) {
+    Storage.getTodoList()
+      .getProject(projectName)
+      .getTasks()
+      .forEach((task) => {
+        if(task.priority === 'DONE'){
+          UI.createTask(task.name, task.dueDate, 'gone', task.description)
+        }
+       }
+      )
+    UI.initAddTaskButtons()
+  }
+
 
   static loadProjectContent(projectName) {
     const projectPreview = document.getElementById('project-board')
@@ -234,6 +249,8 @@ export default class UI {
     UI.clearProjectBoard()
   }
 
+
+
   static closeAddProjectPopup() {
     const addProjectPopup = document.getElementById('add-project-bar')
     const addProjectButton = document.getElementById('add-project-button')
@@ -286,9 +303,8 @@ export default class UI {
     todayProjectsButton.addEventListener('click', UI.openTodayTasks)
 
     projectButtons.forEach((projectButton) =>
-    projectButton.addEventListener('click', UI.handleProjectButton)
-
-    )
+    projectButton.addEventListener('click', UI.handleProjectButton))
+    //UI.alertDeleteTask()
   }
 
   static openInboxTasks() {
@@ -308,6 +324,8 @@ export default class UI {
 
     buttons.forEach((button) => button.classList.remove('active'))
     projectButton.classList.add('active')
+
+    
     UI.closeAddProjectPopup()
     UI.loadProjectContent(projectName)
   }
@@ -359,7 +377,7 @@ export default class UI {
    addTaskPopup.classList.add('active')
 
    UI.closeAllInputs()
-
+   UI.alertDeleteTask()
   }
 
 
@@ -642,30 +660,23 @@ export default class UI {
  }
 
  static setTaskCompleted(taskButton) {
-  const projectName = document.getElementById('project-name')
+  const projectName = document.getElementById('project-name').textContent
   const taskName = taskButton.children[0].children[1].textContent
   const priority = taskButton.children[1].children[0]
 
-  console.log(priority)
   const newPriorityStatus = document.createElement('div')
+  newPriorityStatus.classList.add('completed')
   newPriorityStatus.innerHTML = `<p>DONE</P>`
-  console.log(typeof projectName)
-  console.log(typeof priority)
-  console.log(typeof newPriorityStatus)
-  priority.parentNode.replaceChild(newPriorityStatus, priority)
-
   
+  priority.parentNode.replaceChild(newPriorityStatus, priority)
 
   let taskElement = taskButton.children[0].children[0]
   taskElement.classList.remove('fa-circle')
   taskElement.classList.add('fa-check-circle')
   taskButton.classList.add('checked-background')
-  //taskElement = `<i class="fa fa-check-circle" aria-hidden="true"></i>`
-  //console.log(element)
+
   taskElement.style.backgroundColor = 'green'
-  console.log(taskName)
-
-
+  alert("delete done tasks or reset them")
  }
 
 }

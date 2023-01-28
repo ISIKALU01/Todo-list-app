@@ -439,3 +439,7 @@ textarea {
 .checked-background {
   background-color: rgba(0, 128, 0, 0.301);
 }
+
+.checked-background:hover {
+  background-color: rgba(0, 128, 0, 0.301);
+}

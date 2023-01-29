@@ -42,6 +42,7 @@ export default class Project {
   getTasksToday() {
     return this.tasks.filter((task) => {
       const taskDate = new Date(task.getDateFormatted())
+      console.log(isToday(toDate(taskDate)))
       return isToday(toDate(taskDate))
     })
   }

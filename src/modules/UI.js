@@ -36,18 +36,6 @@ export default class UI {
     }
   }
 
-  static loadDoneTasks(projectName) {
-    Storage.getTodoList()
-      .getProject(projectName)
-      .getTasks()
-      .forEach((task) => {
-        if(task.priority === 'DONE'){
-          UI.createTask(task.name, task.dueDate, 'gone', task.description)
-        }
-       }
-      )
-    UI.initAddTaskButtons()
-  }
 
 
   static loadProjectContent(projectName) {
@@ -377,7 +365,6 @@ export default class UI {
    addTaskPopup.classList.add('active')
 
    UI.closeAllInputs()
-   UI.alertDeleteTask()
   }
 
 

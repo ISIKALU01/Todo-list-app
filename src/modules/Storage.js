@@ -78,7 +78,4 @@ export default class Storage {
     Storage.saveTodoList(todoList)
   }
 
-
-
-
 }

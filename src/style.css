@@ -141,8 +141,8 @@ i {
 .button-project:hover,
 .default-project-button:hover,
 .add-project-button:hover {
-  background-color: rgba(0, 0, 0, 0.795);
-  color: whitesmoke;
+  background-color: rgb(228, 222, 222);
+  color: black;
 }
 
 .right-project-panel {

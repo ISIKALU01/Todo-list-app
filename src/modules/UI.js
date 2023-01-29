@@ -289,6 +289,7 @@ export default class UI {
 
     inboxProjectsButton.addEventListener('click', UI.openInboxTasks)
     todayProjectsButton.addEventListener('click', UI.openTodayTasks)
+    weekProjectsButton.addEventListener('click', UI.openWeekTasks)
 
     projectButtons.forEach((projectButton) =>
     projectButton.addEventListener('click', UI.handleProjectButton))
@@ -302,6 +303,11 @@ export default class UI {
   static openTodayTasks() {
     Storage.updateTodayProject()
     UI.openProject('Today', this)
+  }
+
+  static openWeekTasks() {
+    Storage.updateWeekProject()
+    UI.openProject('This week', this)
   }
 
 

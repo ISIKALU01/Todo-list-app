@@ -53,4 +53,32 @@ export default class TodoList {
       })
     })
   }
+
+  updateWeekProject() {
+    this.getProject('This week').tasks = []
+
+    this.projects.forEach((project) => {
+      if (project.getName() === 'Today' || project.getName() === 'This week')
+        return
+
+      const weekTasks = project.getTasksThisWeek()
+      weekTasks.forEach((task) => {
+        const taskName = `${task.getName()} (${project.getName()})`
+        const taskPriority = task.getPriority()
+        const taskDescription = task.getDescription()
+        this.getProject('This week').addTask(new Task(taskName, task.getDate(), taskPriority, taskDescription))
+      })
+    })
+
+    this.getProject('This week').setTasks(
+      this.getProject('This week')
+        .getTasks()
+        .sort((taskA, taskB) =>
+          compareAsc(
+            toDate(new Date(taskA.getDateFormatted())),
+            toDate(new Date(taskB.getDateFormatted()))
+          )
+        )
+    )
+  }
 }

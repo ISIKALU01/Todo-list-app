@@ -482,6 +482,9 @@ export default class UI {
 
 
  static openDescription(taskButton) {
+  const projectName = document.getElementById('project-name').textContent
+  if(projectName === 'Today' || projectName === 'This week') return
+
   const description = taskButton.parentElement.children[1]
   if(description.classList.contains('active')){
     UI.closeAllInputs()
@@ -502,6 +505,11 @@ export default class UI {
   const projectName = document.getElementById('project-name').textContent
   const taskName = taskButton.children[0].children[1].textContent
 
+  if (projectName === 'Today' || projectName === 'This week') {
+    const mainProjectName = taskName.split('(')[1].split(')')[0]
+    Storage.deleteTask(mainProjectName, taskName)
+  }
+
   Storage.deleteTask(projectName, taskName)
   UI.clearTasks()
   UI.loadTasks(projectName)
@@ -509,6 +517,9 @@ export default class UI {
 
 
  static openSetDateInput(taskButton) {
+  const projectName = document.getElementById('project-name').textContent
+  if(projectName === 'Today' || projectName === 'This week') return
+
   const dueDate = taskButton.children[3].children[0]
   const dueDateInput = taskButton.children[3].children[1]
 
@@ -538,6 +549,9 @@ export default class UI {
  }
 
  static openRenameInput(taskButton) {
+  const projectName = document.getElementById('project-name').textContent
+  if(projectName === 'Today' || projectName === 'This week') return
+
   const taskNameParaTag = taskButton.children[0].children[1]
   let taskName = taskNameParaTag.textContent
   const taskNameInput = taskButton.children[0].children[2]
@@ -564,6 +578,7 @@ export default class UI {
   const taskName = this.previousElementSibling.textContent
   const newTaskName = this.value
  
+  
 
   if (newTaskName === '') {
     alert("Task name can't be empty")
@@ -576,8 +591,9 @@ export default class UI {
     return
   }
 
-  Storage.renameTask(projectName, taskName, newTaskName)
 
+  Storage.renameTask(projectName, taskName, newTaskName)
+  
 
   UI.clearTasks()
   UI.loadTasks(projectName)
@@ -585,6 +601,9 @@ export default class UI {
  }
 
  static openPrioritySelect(taskButton) {
+  const projectName = document.getElementById('project-name').textContent
+  if(projectName === 'Today' || projectName === 'This week') return
+
   const taskLevel = taskButton.children[1].children[0]
   const taskLevelSelect = taskButton.children[1].children[1]
 
@@ -654,6 +673,9 @@ export default class UI {
 
  static setTaskCompleted(taskButton) {
   const projectName = document.getElementById('project-name').textContent
+  if(projectName === 'Today' || projectName === 'This week') return
+
+  
   const taskName = taskButton.children[0].children[1].textContent
   const priority = taskButton.children[1].children[0]
 

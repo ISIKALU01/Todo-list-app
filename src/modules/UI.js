@@ -146,7 +146,14 @@ export default class UI {
   }
 
   static handleDescription(e) {
+    const projectName = document.getElementById('project-name').textContent
+    if(projectName === 'Today' || projectName === 'This week') {
+      console.log(this)
+      this.children[1].classList.remove('fa-pencil-square-o')
+    }
+
     const descriptionText = this.children[0].innerHTML
+    console.log(e.target)
 
     if(e.target.classList.contains('fa-pencil-square-o')){
       this.children[0].classList.add('active')
@@ -285,15 +292,16 @@ export default class UI {
     const todayProjectsButton = document.getElementById('today-button')
     const weekProjectsButton = document.getElementById('week-button')
     const projectButtons = document.querySelectorAll(".button-project")
+    const openNavButton = document.getElementById('open-nav-button')
 
 
     inboxProjectsButton.addEventListener('click', UI.openInboxTasks)
     todayProjectsButton.addEventListener('click', UI.openTodayTasks)
     weekProjectsButton.addEventListener('click', UI.openWeekTasks)
+    openNavButton.addEventListener('click', UI.openNav)
 
     projectButtons.forEach((projectButton) =>
     projectButton.addEventListener('click', UI.handleProjectButton))
-    //UI.alertDeleteTask()
   }
 
   static openInboxTasks() {
@@ -346,6 +354,14 @@ export default class UI {
     UI.openProject(projectName, this)
 
   }
+
+  static openNav() {
+    const nav = document.getElementById('nav')
+
+    UI.closeAllInputs()
+    nav.classList.toggle('active')
+  }
+
 
 
 
@@ -479,27 +495,6 @@ export default class UI {
 
 }
 
-
-
- static openDescription(taskButton) {
-  const projectName = document.getElementById('project-name').textContent
-  if(projectName === 'Today' || projectName === 'This week') return
-
-  const description = taskButton.parentElement.children[1]
-  if(description.classList.contains('active')){
-    UI.closeAllInputs()
-    return
-  }
-
-  UI.closeAllInputs()
-
-  description.classList.add('active')
- }
-
- static closeDescription(taskButton) {
-  const description = taskButton.parentElement.children[1]
-  description.classList.remove('active')
- }
 
  static deleteTask(taskButton) {
   const projectName = document.getElementById('project-name').textContent
@@ -639,6 +634,34 @@ export default class UI {
  }
 
 
+
+ static openDescription(taskButton) {
+  const description = taskButton.parentElement.children[1]
+  const projectName = document.getElementById('project-name').textContent
+
+  if(projectName === 'Today' || projectName === 'This week') {
+    taskButton.nextElementSibling.children[1].classList.remove('fa-pencil-square-o')
+    console.log(this)
+    console.log(taskButton)
+    console.log(taskButton.nextElementSibling) //children[1].classList.remove('fa-pencil-square-o')
+  }
+
+
+  console.log(description)
+  if(description.classList.contains('active')){
+    UI.closeAllInputs()
+    return
+  }
+
+  UI.closeAllInputs()
+
+  description.classList.add('active')
+ }
+
+ static closeDescription(taskButton) {
+  const description = taskButton.parentElement.children[1]
+  description.classList.remove('active')
+ }
 
  static renameDescription(e){
   if(e.key !== 'Enter')return

@@ -9,6 +9,7 @@ export default class UI {
   static loadHomepage() {
     UI.loadProjects()
     UI.initProjectButtons()
+    UI.openProject('Inbox', document.getElementById('inbox-button'))
   }
 
   static loadProjects() {

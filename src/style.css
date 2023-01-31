@@ -484,6 +484,16 @@ textarea {
 
 
 /* media queries */
+@media (max-width: 800px) {
+  .task-content {
+    width: 100px;
+  }
+
+  .fa-file-text {
+    padding-left: 5px;
+  }
+}
+
 @media (max-width: 650px) {
   .open-nav-button {
     display: block;

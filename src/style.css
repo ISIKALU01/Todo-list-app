@@ -17,6 +17,8 @@ body {
   color: rgb(37, 34, 34);
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   line-height: 1.6;
+  /* footer support */
+  margin-bottom: 48px;
 }
 
 button,
@@ -404,7 +406,6 @@ textarea {
   margin-bottom: 10px;
   border-radius: 5px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  /* font-style: italic; */
   color: rgb(34, 30, 30);
 }
 
@@ -455,9 +456,9 @@ textarea {
 
 
 .footer {
-  /* position: absolute; */
-  /* bottom: 0; */
-  /* left: 0; */
+  position: absolute;
+  bottom: 0;
+  left: 0;
   display: flex;
   align-items: center;
   justify-content: center;

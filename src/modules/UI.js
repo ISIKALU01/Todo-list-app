@@ -641,9 +641,6 @@ export default class UI {
 
   if(projectName === 'Today' || projectName === 'This week') {
     taskButton.nextElementSibling.children[1].classList.remove('fa-pencil-square-o')
-    console.log(this)
-    console.log(taskButton)
-    console.log(taskButton.nextElementSibling) //children[1].classList.remove('fa-pencil-square-o')
   }
 
 

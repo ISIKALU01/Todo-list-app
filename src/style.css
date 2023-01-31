@@ -469,5 +469,21 @@ textarea {
     width: 100%;
   }
 
+
+  .task-content {
+    width: 70px;
+  }
+
+  .fa-file-text {
+    padding-right: 0;
+    padding-left: 10px;
+  }
+
+  .input-due-date {
+    width: 30px;
+  }
+
+
+
  
 }

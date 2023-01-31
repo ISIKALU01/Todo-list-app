@@ -6,6 +6,12 @@
   margin: 0;
 }
 
+html {
+  /* footer support */
+  position: relative;
+  min-height: 100%;
+}
+
 body {
   background-color: rgb(206, 195, 180); 
   color: rgb(37, 34, 34);
@@ -38,6 +44,8 @@ input {
 i {
   margin-right: 10px;
 }
+
+
 
 /* Header */
 
@@ -85,7 +93,6 @@ i {
 .main {
   display: flex;
   min-height: calc(100vh - 104px - 48px);
-  /* min-width: auto; */
 }
 
 
@@ -447,6 +454,32 @@ textarea {
 }
 
 
+.footer {
+  /* position: absolute; */
+  /* bottom: 0; */
+  /* left: 0; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.781);
+  color: antiquewhite;
+  font-size: 18px;
+}
+
+.fa-github {
+  color: antiquewhite;
+  font-size: 22px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.fa-github:hover {
+  transform: rotate(360deg) scale(1.2);
+}
+
+
 
 
 
@@ -469,21 +502,20 @@ textarea {
     width: 100%;
   }
 
+  .button-task {
+    flex-direction: column;
+    gap: 5px;
+    align-items: flex-start;
+  } 
 
   .task-content {
-    width: 70px;
+    width: 100%;
   }
 
-  .fa-file-text {
-    padding-right: 0;
-    padding-left: 10px;
+  .right-task-panel {
+    align-self: flex-end;
   }
 
-  .input-due-date {
-    width: 30px;
-  }
-
-
-
- 
 }
+
+
